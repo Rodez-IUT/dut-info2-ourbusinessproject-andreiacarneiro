@@ -2,7 +2,6 @@ package ourbusinessproject;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -13,8 +12,8 @@ import javax.validation.constraints.Size;
 public class Enterprise {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     @NotEmpty
     private String name;
@@ -43,4 +42,26 @@ public class Enterprise {
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+
 }

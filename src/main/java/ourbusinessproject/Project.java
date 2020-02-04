@@ -2,7 +2,6 @@ package ourbusinessproject;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
@@ -10,11 +9,15 @@ import javax.validation.constraints.NotEmpty;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     @NotEmpty
     private String title;
+
+    public String getTitle() {
+        return title;
+    }
 
     private String description;
 
@@ -25,6 +28,15 @@ public class Project {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
 
 
 }
