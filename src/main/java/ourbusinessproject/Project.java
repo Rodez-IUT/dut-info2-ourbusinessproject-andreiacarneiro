@@ -1,9 +1,9 @@
 package ourbusinessproject;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Project {
@@ -14,6 +14,10 @@ public class Project {
 
     @NotEmpty
     private String title;
+
+    @NotNull
+    @ManyToOne
+    private Enterprise enterprise;
 
     public String getTitle() {
         return title;
@@ -35,6 +39,10 @@ public class Project {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
     }
 
 
