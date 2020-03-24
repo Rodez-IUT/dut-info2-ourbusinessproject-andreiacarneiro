@@ -5,6 +5,11 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 @Service
 public class EnterpriseProjectService {
@@ -41,12 +46,16 @@ public class EnterpriseProjectService {
     }
 
     public Enterprise findEnterpriseById(Long id) {
-        Enterprise enterprise = entityManager.find(Enterprise.class, id);
-        return enterprise;
+        return entityManager.find(Enterprise.class, id);
     }
 
     public Project findProjectById(Long id) {
-        Project project = entityManager.find(Project.class, id);
-        return project;
+        return entityManager.find(Project.class, id);
+    }
+
+    public List<Project> findAllProjects() {
+        String query = "SELECT p FROM Project p ORDER BY p.title";
+        TypedQuery<Project> queryObj = entityManager.createQuery(query, Project.class);
+        return queryObj.getResultList();
     }
 }
