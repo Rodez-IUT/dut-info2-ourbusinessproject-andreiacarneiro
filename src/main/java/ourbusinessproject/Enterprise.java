@@ -70,6 +70,14 @@ public class Enterprise {
         return id;
     }
 
+    public boolean addProject(Project project) {
+        if (projects == null) {
+            projects = new HashSet<>();
+        }
+
+        return projects.add(project);
+    }
+
     public Collection<Project> getProjects() {
         return projects;
     }

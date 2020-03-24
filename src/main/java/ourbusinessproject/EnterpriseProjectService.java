@@ -23,6 +23,13 @@ public class EnterpriseProjectService {
 
 
     public void save(Project project) {
+        Enterprise enterprise = project.getEnterprise();
+
+        if (enterprise != null) {
+            enterprise.addProject(project);
+            this.save(enterprise);
+        }
+
         entityManager.persist(project);
         entityManager.flush();
     }

@@ -15,6 +15,7 @@ public class Project {
     @NotEmpty
     private String title;
 
+
     @NotNull
     @ManyToOne
     private Enterprise enterprise;
@@ -45,6 +46,9 @@ public class Project {
         this.enterprise = enterprise;
     }
 
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
 
 
 }
