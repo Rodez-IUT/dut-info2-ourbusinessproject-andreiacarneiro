@@ -26,6 +26,7 @@ public class EnterpriseProjectService {
         Enterprise enterprise = project.getEnterprise();
 
         if (enterprise != null) {
+            // Association du projet à l'entreprise
             enterprise.addProject(project);
             this.save(enterprise);
         }
