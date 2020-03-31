@@ -21,6 +21,13 @@ public class InitializationService {
 
     @Transactional
     public void initProjects() {
+        // Réponse 2.4.2
+        // La notation @Transactionnal au dessus de cette méthode permet de spécifier
+        // quelle sera exécutée comme une transaction. Une transaction étant atomique,
+        // si une des opérations échoue, toutes les opérations sont annulées (rollback).
+        // Donc ici, si au moins une insertion d'un des 3 Projects échoue alors ce sont
+        // toutes les insertions qui sont annulées (donc aucune insertion en base de données).
+
 
         enterprise1 = new Enterprise();
         enterprise1.setName("Enterprise 1");
