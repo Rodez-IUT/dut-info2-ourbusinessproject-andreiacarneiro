@@ -15,7 +15,7 @@ public class InitializationService {
     private Project project1E1;
     private Project project1E2;
     private Project project2E1;
-    
+
     private Enterprise enterprise1;
     private Enterprise enterprise2;
 
@@ -38,11 +38,9 @@ public class InitializationService {
         project1E2 = new Project("project1E2", "project1E2 description", enterprise2);
         project2E1 = new Project("project2E1", "project2E1 description", enterprise1);
 
-
         enterpriseProjectService.save(project1E1);
         enterpriseProjectService.save(project1E2);
         enterpriseProjectService.save(project2E1);
-
     }
 
     public Project getProject1E1() {

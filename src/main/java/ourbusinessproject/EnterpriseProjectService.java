@@ -1,6 +1,7 @@
 package ourbusinessproject;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;

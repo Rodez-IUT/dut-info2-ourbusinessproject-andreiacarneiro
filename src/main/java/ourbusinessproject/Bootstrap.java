@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 @Component
 public class Bootstrap {
 
-    @Autowired
     private InitializationService initializationService;
 
     public Bootstrap(InitializationService initializationService) {
