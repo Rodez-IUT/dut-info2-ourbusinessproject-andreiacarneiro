@@ -2,10 +2,7 @@ package ourbusinessproject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -17,7 +14,7 @@ import java.util.HashSet;
 public class Enterprise {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
@@ -73,18 +70,12 @@ public class Enterprise {
         return id;
     }
 
-    public boolean addProject(Project project) {
-        if (projects == null) {
-            projects = new HashSet<>();
-        }
-
-        return projects.add(project);
-    }
-
     public Collection<Project> getProjects() {
         return projects;
     }
 
-
+    public void setProjects(Collection<Project> projects) {
+        this.projects = projects;
+    }
 
 }

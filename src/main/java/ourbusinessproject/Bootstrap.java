@@ -17,8 +17,8 @@ public class Bootstrap {
     public void init() {
         try {
             initializationService.initProjects();
-        } catch (RuntimeException err) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

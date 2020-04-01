@@ -19,8 +19,9 @@ public class InitializationService {
     private Enterprise enterprise1;
     private Enterprise enterprise2;
 
+
     @Transactional
-    public void initProjects() {
+    public void initProjects() throws Exception {
         // Réponse 2.4.2
         // La notation @Transactionnal au dessus de cette méthode permet de spécifier
         // quelle sera exécutée comme une transaction. Une transaction étant atomique,
@@ -29,25 +30,61 @@ public class InitializationService {
         // toutes les insertions qui sont annulées (donc aucune insertion en base de données).
 
 
-        enterprise1 = new Enterprise();
-        enterprise1.setName("Enterprise 1");
-        enterprise1.setDescription("Enterprise 1 description");
-        enterprise1.setContactName("Enterprise 1 Contact");
-        enterprise1.setContactEmail("enterprise1@mail.com");
+        initEnterprise1();
+        initEnterprise2();
 
-        enterprise2 = new Enterprise();
-        enterprise2.setName("Enterprise 2");
-        enterprise2.setDescription("Enterprise 2 description");
-        enterprise2.setContactName("Enterprise 2 Contact");
-        enterprise2.setContactEmail("enterprise2@mail.com");
+        initAndSaveProject1E1();
+        initAndSaveProject1E2();
+        initAndSaveProject2E1();
 
-        project1E1 = new Project("project1E1", "project1E1 description", enterprise1);
-        project1E2 = new Project("project1E2", "project1E2 description", enterprise2);
-        project2E1 = new Project("project2E1", "project2E1 description", enterprise1);
+    }
 
-        enterpriseProjectService.save(project1E1);
-        enterpriseProjectService.save(project1E2);
-        enterpriseProjectService.save(project2E1);
+    private void initAndSaveProject1E1() throws Exception {
+        project1E1 = enterpriseProjectService.findProjectByTitle("p1e1");
+        if (project1E1 == null) {
+            project1E1 = new Project("p1e1", "p1 e1 description", enterprise1);
+            enterpriseProjectService.save(project1E1);
+            enterprise1 = project1E1.getEnterprise();
+        }
+    }
+
+    private void initAndSaveProject1E2() throws Exception {
+        project1E2 = enterpriseProjectService.findProjectByTitle("p1e2");
+        if (project1E2 == null) {
+            project1E2 = new Project("p1e2","p1 e2 description", enterprise2);
+            enterpriseProjectService.save(project1E2);
+            enterprise2 = project1E2.getEnterprise();
+        }
+    }
+
+    private void initAndSaveProject2E1() throws Exception {
+        project2E1 = enterpriseProjectService.findProjectByTitle("p2e1");
+        if (project2E1 == null) {
+            project2E1 = new Project("p2e1","p2 e1 description", enterprise1);
+            enterpriseProjectService.save(project2E1);
+        }
+    }
+
+    private void initEnterprise1() throws Exception {
+        enterprise1 = enterpriseProjectService.findEnterpriseByName("E1");
+        if (enterprise1 == null) {
+            enterprise1 = new Enterprise();
+            enterprise1.setName("E1");
+            enterprise1.setDescription("E1 description");
+            enterprise1.setContactName("Paul Durand");
+            enterprise1.setContactEmail("paul.durand@e1.com");
+        }
+    }
+
+    private void initEnterprise2() throws Exception {
+        enterprise2 = enterpriseProjectService.findEnterpriseByName("E2");
+        if (enterprise2 == null) {
+            enterprise2 = new Enterprise();
+            enterprise2.setName("E2");
+            enterprise2.setDescription("E2 description");
+            enterprise2.setContactName("Paul Dupond");
+            enterprise2.setContactEmail("paul.dupond@e2.com");
+        }
     }
 
     public Project getProject1E1() {

@@ -4,12 +4,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 
 @Entity
 public class Project {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
@@ -25,8 +26,8 @@ public class Project {
 
     public Project(@NotEmpty String title, String description, @NotNull Enterprise enterprise) {
         this.title = title;
-        this.enterprise = enterprise;
         this.description = description;
+        setEnterprise(enterprise);
     }
 
     public String getTitle() {
@@ -52,7 +53,16 @@ public class Project {
     }
 
     public void setEnterprise(Enterprise enterprise) {
+        if (this.enterprise != null) {
+            this.enterprise.getProjects().remove(this);
+        }
         this.enterprise = enterprise;
+        if (this.enterprise != null) {
+            if (this.enterprise.getProjects() == null) {
+                this.enterprise.setProjects(new ArrayList<>());
+            }
+            this.enterprise.getProjects().add(this);
+        }
     }
 
     public Enterprise getEnterprise() {
